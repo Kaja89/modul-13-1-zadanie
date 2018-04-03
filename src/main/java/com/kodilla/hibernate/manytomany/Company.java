@@ -5,8 +5,14 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+@NamedNativeQuery(
+        name = "Company.findByThreeSigns",
+        query = "select * from companies where company_name like CONCAT(:COMPANY_NAME,'%')",
+        resultClass = Company.class
+)
+
 @Entity
-@Table(name="COMPANIES")
+@Table(name = "COMPANIES")
 public class Company {
     private int id;
     private String name;

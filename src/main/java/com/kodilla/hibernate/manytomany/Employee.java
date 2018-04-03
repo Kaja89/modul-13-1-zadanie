@@ -5,15 +5,20 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+@NamedQuery(
+        name = "Employee.findEmployeeByLastname",
+        query = "FROM Employee WHERE lastname = :LASTNAME"
+)
+
 @Entity
-@Table(name="EMPLOYEES")
+@Table(name = "EMPLOYEES")
 public class Employee {
     private int id;
     private String firstname;
     private String lastname;
     private List<Company> companies = new ArrayList<>();
 
-    public Employee(){
+    public Employee() {
 
     }
 
@@ -25,7 +30,7 @@ public class Employee {
     @Id
     @GeneratedValue
     @NotNull
-    @Column(name="EMPLOYEE_ID", unique = true)
+    @Column(name = "EMPLOYEE_ID", unique = true)
     public int getId() {
         return id;
     }
