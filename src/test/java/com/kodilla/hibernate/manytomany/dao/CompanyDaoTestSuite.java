@@ -2,6 +2,8 @@ package com.kodilla.hibernate.manytomany.dao;
 
 import com.kodilla.hibernate.manytomany.Company;
 import com.kodilla.hibernate.manytomany.Employee;
+import com.kodilla.hibernate.manytomany.facade.DataException;
+import com.kodilla.hibernate.manytomany.facade.SearchingFacade;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,6 +23,9 @@ public class CompanyDaoTestSuite {
 
     @Autowired
     EmployeeDao employeeDao;
+
+    @Autowired
+    SearchingFacade searchingFacade;
 
     @Test
     public void testSaveManyToMany() {
@@ -99,7 +104,7 @@ public class CompanyDaoTestSuite {
         int greyMatterId = greyMatter.getId();
 
         //When
-        List<Employee> retrievedEmployees = employeeDao.findEmployeeByLastname("Smith");
+        List<Employee> retrievedEmployees = employeeDao.findEmployeeByLastname("smit");
         System.out.println(retrievedEmployees.get(0).getFirstname());
         System.out.println(retrievedEmployees.get(0).getLastname());
 
@@ -147,7 +152,7 @@ public class CompanyDaoTestSuite {
         int greyMatterId = greyMatter.getId();
 
         //When
-        List<Company> retrievedCompanies = companyDao.findByThreeSigns("Sof");
+        List<Company> retrievedCompanies = companyDao.findByThreeSigns("sof");
         System.out.println(retrievedCompanies.get(0).getName());
 
         //Then
@@ -159,6 +164,27 @@ public class CompanyDaoTestSuite {
             companyDao.delete(dataMastersId);
             companyDao.delete(greyMatterId);
         } catch (Exception e) {
+
+        }
+    }
+
+    @Test
+    public void testSearchingFacade(){
+        try{
+            searchingFacade.prepareData();
+        } catch (DataException e){
+
+        }
+
+        try {
+            searchingFacade.findByCompanyName("ads");
+        } catch (DataException e){
+
+        }
+
+        try{
+            searchingFacade.findEmployeeByLastName("rck");
+        } catch(DataException e){
 
         }
     }

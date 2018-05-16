@@ -7,7 +7,7 @@ import java.util.List;
 
 @NamedNativeQuery(
         name = "Company.findByThreeSigns",
-        query = "select * from companies where company_name like CONCAT(:COMPANY_NAME,'%')",
+        query = "select * from companies where company_name like CONCAT('%',:COMPANY_NAME,'%')",
         resultClass = Company.class
 )
 
